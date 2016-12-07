@@ -12,6 +12,9 @@ charset(request);
 // https://github.com/nodejs/node/issues/8987
 var sanitize = require('sanitize-filename');
 
+// encodeURIComponent with charset
+// https://github.com/alsotang/urlencode
+
 // 辅组类模块
 // 解析命令行参数
 var commander = require('commander');
@@ -134,6 +137,7 @@ function testWriteFile() {
     var dataFileName = '测试中文特殊:/\符号aaa.txt';
     dataFileName = sanitize(dataFileName);
     fs.writeFileSync(dataFileName, dataFileName);
+    // fs.appendFileSync();
 }
 // 测试 Inquirer
 function testInquirer() {
