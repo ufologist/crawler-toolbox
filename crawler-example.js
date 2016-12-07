@@ -1,15 +1,3 @@
-// crawler
-
-// [网络爬虫与数据库操作](https://github.com/leizongmin/book-crawler-mysql-cron/blob/master/book.md)
-
-// 发起一个 HTTP 请求来获取指定 URL 的内容；
-// 使用 jQuery 的查询语法来操作网页元素，提取出需要的数据；
-// 将数据储存到数据库中，以及从数据库中查询出这些数据；
-// 建立一个简单的 Web 服务器来显示这些数据；
-// 使用简单的方法来让一些程序在指定的时间自动执行；
-// 让程序更稳定地运行；
-// 对一些常见的字符编码互相转换。
-
 // 系统模块
 var fs = require('fs');
 
