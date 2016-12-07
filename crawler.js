@@ -60,3 +60,25 @@ function buildAgent(agent) {
 }
 
 // HTTP 请求相关的示例请参考 crawler-example.js
+function demo(keyword) {
+    // 抓取百度搜索的结果
+    var agent = request.get('https://www.baidu.com/s');
+    buildAgent(agent);
+
+    return agent.query({
+                    wd: keyword
+                })
+                .then(crawlerUtil.showMeTheDollar)
+                .then(function($) {
+                    return $('.result').map(function() {
+                        var $this = $(this);
+
+                        return {
+                            title: $this.find('.t').text(),
+                            url: $this.find('.c-showurl').text()
+                        };
+                    }).toArray();
+                });
+}
+
+demo('亚马逊').then(function(result) {console.log(result);});
