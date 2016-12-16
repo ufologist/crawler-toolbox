@@ -54,6 +54,18 @@ function buildAgent(agent) {
 
 // HTTP GET
 function testGet() {
+    var agent = request.get('http://httpbin.org/get');
+    buildAgent(agent);
+
+    return agent.query({
+                    q: 1,
+                    q2: '哈哈'
+                })
+                .then(function(result) {
+                    return result.body;
+                });
+}
+function testGetGb2312Html() {
     var agent = request.get('http://www.best73.com/Corp.html');
     buildAgent(agent);
 
@@ -73,9 +85,9 @@ function testGet() {
                     return title;
                 });
 }
-// HTTP POST application/x-www-form-urlencoded
+// HTTP POST Content-Type: application/x-www-form-urlencoded
 function testPostFormUrlEncoded() {
-    var agent = request.post('http://www.best73.com/Corp.html');
+    var agent = request.post('http://httpbin.org/post');
     buildAgent(agent);
 
     return agent.type('form')
@@ -83,30 +95,30 @@ function testPostFormUrlEncoded() {
                     q: 1,
                     q2: '哈哈'
                 })
-                .then(function() {
-                    return 'testPostFormUrlEncoded';
+                .then(function(result) {
+                    return result.body;
                 });
 }
-// HTTP POST application/json
+// HTTP POST Content-Type: application/json
 function testPostJson() {
-    var agent = request.post('http://www.best73.com/Corp.html');
+    var agent = request.post('http://httpbin.org/post');
     buildAgent(agent);
 
     return agent.send({
                     q: 1,
                     q2: '哈哈'
                 })
-                .then(function() {
-                    return 'testPostJson';
+                .then(function(result) {
+                    return result.body;
                 });
 }
 // 测试通过 Promise 来控制延时任务
 function testPromise() {
     return new Promise(function(resolve, reject) {
-        testGet().then(function(title) {
-            // console.log(title);
+        testGet().then(function(json) {
+            // console.log(json);
             setTimeout(function() {
-                resolve(title);
+                resolve(json);
             }, crawlerUtil.randomInt(2000, 3000));
         });
     });
@@ -127,9 +139,17 @@ function testSequenceRequest() {
 // 测试共享 Cookie
 function testAgentCookie() {
     var agent = request.agent();
-    agent.get('http://www.baidu.com') // 第一个页面
-         .then(function() {           // 第二个页面, cookie 会一直跟随着
-             return agent.get('http://www.baidu.com');
+    agent.get('http://httpbin.org/cookies/set') // 第一个页面
+         .query({
+             name: 'crawler'
+         })
+         .then(function(result) {               // 第二个页面, cookie 会一直跟随着
+             console.log(1, result.body.cookies);
+
+             return agent.get('http://httpbin.org/cookies').then(function(result) {
+                 console.log(2, result.body.cookies);
+                 return result.body;
+             });
          });
 }
 // 测试写入文件
@@ -185,7 +205,8 @@ function testCron() {
 // testInquirer();
 // testAgentCookie();
 // testGet().then(function(r) {console.log('testGet', r)});
-// testPostFormUrlEncoded().then(function(r) {console.log(r)});
-// testPostJson().then(function(r) {console.log(r)});
+// testGetGb2312Html().then(function(r) {console.log('testGetGb2312Html', r)});
+// testPostFormUrlEncoded().then(function(r) {console.log('testPostFormUrlEncoded', r)});
+// testPostJson().then(function(r) {console.log('testPostJson', r)});
 // testPromise().then(function(r) {console.log('testPromise', r);});
 // testSequenceRequest().then(function() {console.log('over');});
