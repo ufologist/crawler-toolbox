@@ -44,3 +44,4 @@ v0.1.0 2016-12-7
 
   [神箭手云爬虫 爬取规则示例](https://github.com/ShenJianShou/crawler_samples)
 * [八爪鱼采集器 - 网页数据采集器](http://www.bazhuayu.com/)
+* [Finndy+云采集引擎](http://www.finndy.com/?action-engine)
