@@ -45,3 +45,6 @@ v0.1.0 2016-12-7
   [神箭手云爬虫 爬取规则示例](https://github.com/ShenJianShou/crawler_samples)
 * [八爪鱼采集器 - 网页数据采集器](http://www.bazhuayu.com/)
 * [Finndy+云采集引擎](http://www.finndy.com/?action-engine)
+* [Faker](https://github.com/cupools/faker "An experience spider to collect free proxy ip through extensible task")
+  * [西刺免费](http://www.xicidaili.com/nn/)
+  * [快代理](http://www.kuaidaili.com/free/inha/)
