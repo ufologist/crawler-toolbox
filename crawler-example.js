@@ -128,7 +128,7 @@ function testPromise() {
 }
 // 测试序列任务
 function testSequenceRequest() {
-    return Array(10).map((v, i) => i).reduce(function(promise, value) {
+    return Array(10).fill(1).map((v, i) => i).reduce(function(promise, value) {
         return promise.then(function() {
             return testPostJson().then(function(t) {
                 console.log(value, t);
