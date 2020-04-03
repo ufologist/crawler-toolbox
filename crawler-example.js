@@ -1,6 +1,8 @@
 // 系统模块
 var fs = require('fs');
 
+var dayjs = require('dayjs');
+
 // HTTP 模块与 DOM 解析, 这是爬虫的核心模块
 // HTTP 请求
 var request = require('superagent'); // 备选模块 request, 也支持 cookie
@@ -36,6 +38,7 @@ console.log('commander', commander.aa, commander.bb);
 
 // 提示声
 var beep = require('beepbeep'); // 如果要更复杂的播放声音 https://github.com/Marak/play.js
+var notifier = require('node-notifier');
 
 // cron 定时任务
 var schedule = require('node-schedule');
@@ -125,9 +128,7 @@ function testPromise() {
 }
 // 测试序列任务
 function testSequenceRequest() {
-    var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-    return array.reduce(function(promise, value) {
+    return Array(10).map((v, i) => i).reduce(function(promise, value) {
         return promise.then(function() {
             return testPostJson().then(function(t) {
                 console.log(value, t);
@@ -193,13 +194,33 @@ function testInquirer() {
 function testNotifySound() {
     beep(5, 1000);
 }
+function testNativeNotifier() {
+    notifier.notify({
+        title: '标题',
+        message: '消息'
+    });
+}
+function testDingdingRobot() {
+    var webhook = 'https://oapi.dingtalk.com/robot/send?access_token=';
+    var secret = 'SEC';
+
+    return crawlerUtil.sendDingdingRobotMessage(webhook, secret, '消息').then(r => console.log(r));
+}
+function testDate() {
+    var d = dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
+    console.log(d);
+}
 function testCron() {
     var j = schedule.scheduleJob('*/5 * * * * *', function(){
-        console.log('每 5 秒执行一次...');
+        console.log(new Date().toLocaleTimeString(), '每 5 秒执行一次...');
+        console.log('-----------------');
     });
 }
 
 // testNotifySound();
+// testNativeNotifier();
+// testDate();
+// testDingdingRobot();
 // testCron();
 // testWriteFile();
 // testInquirer();
