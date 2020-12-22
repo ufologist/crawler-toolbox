@@ -17,7 +17,7 @@
     "dayjs": "^1.8.23",
     "inquirer": "^1.2.3",
     "log4js": "^1.0.1",
-    "node-notifier": "^6.0.0",
+    "node-notifier": "^8.0.1",
     "node-schedule": "^1.2.0",
     "sanitize-filename": "^1.6.1",
     "superagent": "^3.0.0",
