@@ -16,7 +16,7 @@
     "commander": "^2.9.0",
     "dayjs": "^1.8.23",
     "inquirer": "^1.2.3",
-    "log4js": "^1.0.1",
+    "log4js": "^6.4.0",
     "node-notifier": "^6.0.0",
     "node-schedule": "^1.2.0",
     "sanitize-filename": "^1.6.1",
